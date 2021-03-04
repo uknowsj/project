@@ -1,0 +1,23 @@
+{% set title = "글 작성" %}
+{% extends "layout/base.html" %}
+ 
+{% block content -%}
+    <form action="" method="post">
+        <table class="table table-bordered">
+            <tr>
+                <th>제목</th>
+                <td><input type="text" name="title" class="form-control" value="{{ data.title }}"/></td>
+            </tr>
+            <tr>
+                <th>말머리</th>
+                <td><input type="text" name="brackets" class="form-control" value="{{ data.brackets }}"/></td>
+            </tr>
+            <tr>
+                <th>내용</th>
+                <td><input type="text" name="description" class="form-control" value="{{ data.description }}" /></td>
+            </tr>
+        </table>
+        <button class="btn btn-primary">작성하기</button>
+    </form>
+
+{% endblock %}
