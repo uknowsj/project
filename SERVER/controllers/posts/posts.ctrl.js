@@ -28,27 +28,31 @@ exports.post_issue_posts_write = (req,res)=>{
 
 exports.get_issue_posts_detail = async (req,res)=>{
     try{
-        const { id, edit } = req.params;
-        const data = await models.Issue.findByPk(req.params.id);
-        console.log("id edit",id,edit);
-
-        if(edit){//글 수정. write.html form 재사용. 클릭했을 때 작성했던 내용이 input 값 안에 들어있어야함
-            console.log("edit버전");
-            res.render('posts/write.html',{data});
-        }//edit===false면 그냥 글 상세정보 보여줌
-        else{
-            res.render('posts/detail.html',{data});
-        }
+        const data = await models.Issue.findByPk(req.params.id); //id값으로 DB에서 데이터를 찾아서
+        res.render('posts/detail.html',{data}); //detail page에 value 값으로 뿌려줌
     }catch(e){
         console.error(e);
     }
 }
 
 // //글 수정. write.html form 재사용. 클릭했을 때 작성했던 내용이 input 값 안에 들어있어야함
-// exports.get_issue_posts_edit = async (req,res)=>{
-//     try{
-//         const data = await models.Issue.find
-//     }catch(e){
-
-//     }
-// }
+exports.get_issue_posts_edit = async (req,res)=>{
+    try{
+        const data = await models.Issue.findByPk(req.params.id);
+        res.render('posts/write.html',{data}); //write.html 재활용. input 값 수정후 수정하기 버튼 누르면 같은 주소로 post방식으로 전달
+    }catch(e){
+        console.error(e);
+    }
+}
+exports.post_issue_posts_edit = async (req,res)=>{
+    try{
+        //전달받은 값을 DB에 업데이트
+        models.Issue.update({},
+            {
+                where : {id : req.params.id}
+            }
+        )
+    }catch(e){
+        console.error(e);
+    }
+}
