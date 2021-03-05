@@ -9,25 +9,29 @@
             <th>삭제</th>
         </tr>
         <tr>
-            <td>제목</td>
-            <td>날짜</td>
-            <td>삭제</td>
+            <td>제목 예시</td>
+            <td>날짜 예시</td>
+            <td>삭제 예시</td>
         </tr>
         {% for item in lists %}
-            <tr>
-                <td>
+        <tr>
+            <td>
+                <a href="/posts/issue/detail/{{ item.id }}">
                     {{ item.title }}
-                </td>
-                <td>
-                    {{ item.createdAt }}
-                </td>
-                <td>
-                    <a href="#" class="btn btn-danger">삭제</a>
-                </td>
-            </tr>
+                </a>
+            </td>
+            <td>
+                <a href="/posts/issue/detail/{{ item.id }}">
+                    {{ item.dateFormat( Item.createdAt ) }}
+                </a>
+            </td>
+            <td>
+                <a href="/posts/issue/delete/{{ item.id }}" class="btn btn-danger">삭제</a>
+            </td>
+        </tr>
         {% endfor %}
     </table>
 
     <a href="/posts/issue/write" class="btn btn-default">작성하기</a>
-
+    
 {% endblock %}

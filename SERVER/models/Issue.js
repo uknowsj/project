@@ -10,5 +10,7 @@ module.exports = function(sequelize, DataTypes){
             
         }    
     );
+    //프로토타입에 date format을 바꿔주는 메소드 생성
+    Issue.prototype.dateFormat = (date)=>moment(date).format('YYYY-MM-DD');
     return Issue;
 };

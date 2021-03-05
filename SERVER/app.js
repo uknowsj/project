@@ -21,7 +21,7 @@ class App{
         this.setStatic();
 
         // 로컬 변수
-        this.setLocals();
+        // this.setLocals();
 
         // 라우팅
         this.getRouting();
@@ -39,7 +39,6 @@ class App{
         db.sequelize.authenticate() //authenticate는 promise 객체를 반환해줌
         .then(()=>{
             console.log('Connection has been established successfully.')
-            return db.sequelize.sync();
         })
         .catch(err=>{
             console.error('Unable to connect to the database:', err);
@@ -63,14 +62,14 @@ class App{
         this.app.use('/uploads',express.static('uploads'));
     }
     
-    setLocals(){
-        //템플릿 변수
-        this.app.use((req,res,next)=>{
-        this.app.locals.isLogin = true;
-            this.app.locals.req_path=req.path;
-            next();
-        })
-    }
+    // setLocals(){
+    //     //템플릿 변수
+    //     this.app.use((req,res,next)=>{
+    //     this.app.locals.isLogin = true;
+    //         this.app.locals.req_path=req.path;
+    //         next();
+    //     })
+    // }
 
     getRouting(){
         this.app.use(require('./controllers'));

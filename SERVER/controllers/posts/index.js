@@ -12,7 +12,10 @@ router.post('/issue/write',ctrl.post_issue_posts_write); //작성한 내용 post
 router.get('/issue/detail/:id',ctrl.get_issue_posts_detail); //상세 글 보기
 
 //write.html 재활용
-router.get('/issue/edit/:id',ctrl_get_issue_posts_edit); //작성 글 수정창
-router.post('/issue/edit/:id',ctrl_get_issue_posts_edit); //수정한 내용을 받아서 DB에 저장
-// router.post('/issue/:id') 작성글 삭제
+router.get('/issue/edit/:id',ctrl.get_issue_posts_edit); //작성 글 수정창
+router.post('/issue/edit/:id',ctrl.post_issue_posts_edit); //수정한 내용을 받아서 DB에 저장
+
+router.get('/issue/delete/:id',ctrl.get_issue_posts_delte); //작성글 삭제
+
+
 module.exports = router;

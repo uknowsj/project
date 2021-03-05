@@ -47,11 +47,32 @@ exports.get_issue_posts_edit = async (req,res)=>{
 exports.post_issue_posts_edit = async (req,res)=>{
     try{
         //전달받은 값을 DB에 업데이트
-        models.Issue.update({},
+        const {title,brackets,description} = req.body;
+        models.Issue.update({
+            //첫번 째 인자 : 수정할 내용을 키:value 형식으로 전달
+            title,
+            brackets,
+            description
+        },
             {
                 where : {id : req.params.id}
             }
         )
+        
+        //수정 후 redirect
+        res.redirect('/posts/issue/detail/'+req.params.id);
+    }catch(e){
+        console.error(e);
+    }
+}
+
+//삭제
+exports.get_issue_posts_delte = async (req,res)=>{
+    try{
+        models.Issue.destroy({
+            where : {id : req.params.id}
+        })
+        res.redirect('/posts/issue/'); //주소 마지막에 /를 붙여줘야 refresh되는듯? 
     }catch(e){
         console.error(e);
     }
